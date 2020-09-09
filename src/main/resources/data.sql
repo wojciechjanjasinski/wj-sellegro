@@ -1,3 +1,4 @@
+--                    id,carMake,carModel,color,price,endDate --
 insert into auctions (id, carMake, carModel, color, price, endDate) values (1, 'Ford', 'Explorer', 'Yellow', 65811.21, '2018-10-29');
 insert into auctions (id, carMake, carModel, color, price, endDate) values (2, 'Ford', 'Falcon', 'Khaki', 53330.93, '2018-10-29');
 insert into auctions (id, carMake, carModel, color, price, endDate) values (3, 'Chevrolet', 'Blazer', 'Violet', 101075.82, '2018-11-16');

@@ -10,6 +10,8 @@ import pl.javastart.sellegro.auction.AuctionService;
 import pl.javastart.sellegro.auction.Sorting;
 import pl.javastart.sellegro.repository.AuctionRepository;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +32,8 @@ public class AuctionController {
     }
 
     @GetMapping("/auctions")
-    public String auctions (Model model,
-                            @RequestParam(required = false, defaultValue = "ALL") Sorting sort){
+    public String auctions(Model model,
+                           @RequestParam(required = false, defaultValue = "ALL") Sorting sort) {
         List<Auction> auctions = switch (sort) {
             case ID_UP -> auctionRepository.findByOrderByIdAsc();
             case ID_DOWN -> auctionRepository.findByOrderByIdDesc();
@@ -52,8 +54,25 @@ public class AuctionController {
         model.addAttribute("auctions", auctions);
         return "auctions";
     }
-}
 
-//public String auctions(Model model,
-//                           @RequestParam(required = false) String sort,
-//                           AuctionFilters auctionFilters)
+    @GetMapping("/filters")
+    public String filters(Model model,
+                          @RequestParam(required = false, defaultValue = "ALL") Sorting sort,
+                          @RequestParam(required = false) Long id,
+                          @RequestParam(required = false) String carPropriety,
+                          @RequestParam(required = false) BigDecimal price,
+                          @RequestParam(required = false) LocalDate endDate) {
+        List<Auction> filters = switch (sort) {
+            case ID -> auctionRepository.findByIdStartingWith(id);
+            case TITLE -> auctionRepository.findByTitleStartingWith(carPropriety);
+            case CAR_MAKE -> auctionRepository.findByCarMakeStartingWith(carPropriety);
+            case CAR_MODEL -> auctionRepository.findByCarModelStartingWith(carPropriety);
+            case COLOR -> auctionRepository.findByColorStartingWith(carPropriety);
+            case PRICE -> auctionRepository.findByPriceContaining(price);
+            case END_DATE -> auctionRepository.findByEndDateContaining(endDate);
+            default -> auctionRepository.findAll();
+        };
+        model.addAttribute("filters", filters);
+        return "auctions";
+    }
+}

@@ -1,7 +1,6 @@
 package pl.javastart.sellegro.auction;
 
 public enum Sorting {
-    ALL,
     ID_UP,
     ID_DOWN,
     TITLE_UP,
@@ -15,5 +14,12 @@ public enum Sorting {
     PRICE_UP,
     PRICE_DOWN,
     END_DATE_UP,
-    END_DATE_DOWN
+    END_DATE_DOWN,
+    ID,
+    TITLE,
+    CAR_MAKE,
+    CAR_MODEL,
+    COLOR,
+    PRICE,
+    END_DATE
 }

@@ -3,6 +3,8 @@ package pl.javastart.sellegro.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import pl.javastart.sellegro.auction.Auction;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface AuctionRepository extends JpaRepository<Auction, Long> {
@@ -35,4 +37,17 @@ public interface AuctionRepository extends JpaRepository<Auction, Long> {
 
     List<Auction> findByOrderByEndDateDesc();
 
+    List<Auction> findByIdStartingWith(Long id);
+
+    List<Auction> findByTitleStartingWith(String title);
+
+    List<Auction> findByCarMakeStartingWith(String carMake);
+
+    List<Auction> findByCarModelStartingWith(String carMake);
+
+    List<Auction> findByColorStartingWith(String color);
+
+    List<Auction> findByPriceContaining(BigDecimal price);
+
+    List<Auction> findByEndDateContaining(LocalDate endDate);
 }

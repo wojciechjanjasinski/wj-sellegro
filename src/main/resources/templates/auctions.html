@@ -8,7 +8,7 @@
     <h1 style="text-align: center" class="mt-4">WSZYSTKIE AUKCJE</h1>
 
     <form action="/auctions" method="get" th:object="${auctions}">
-        <input type="text" placeholder="Tytuł aukcji" th:field="*{}">
+        <input type="text" placeholder="Tytuł aukcji" th:field="*{auctions.getTitle}">
         <input type="text" placeholder="Producent" th:field="*{carMake}">
         <input type="text" placeholder="Marka" th:field="*{auctions.getcarModel}">
         <input type="text" placeholder="Kolor" th:field="*{getColor}">

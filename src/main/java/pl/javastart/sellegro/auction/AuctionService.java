@@ -1,7 +1,6 @@
 package pl.javastart.sellegro.auction;
 
 import org.springframework.stereotype.Service;
-import org.springframework.util.comparator.Comparators;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class AuctionService {
 
-    private List<Auction> auctions;
+    private List<Auctions> auctions;
 
     private static final String[] ADJECTIVES = {"Niesamowity", "Jedyny taki", "IGŁA", "HIT", "Jak nowy",
             "Perełka", "OKAZJA", "Wyjątkowy"};
@@ -48,30 +47,30 @@ public class AuctionService {
             String title = randomAdjective + " " + data[1] + " " + data[2];
             BigDecimal price = new BigDecimal(data[4].replace("\\.", ","));
             LocalDate endDate = LocalDate.parse(data[5]);
-            Auction auction = new Auction(id, title, data[1], data[2], data[3], price, endDate);
-            auctions.add(auction);
+            Auctions auctions = new Auctions(id, title, data[1], data[2], data[3], price, endDate);
+            this.auctions.add(auctions);
         }
     }
 
-    public List<Auction> find4MostExpensive() {
+    public List<Auctions> find4MostExpensive() {
         return auctions.stream()
-                .sorted(Comparator.comparing(Auction::getPrice).reversed())
+                .sorted(Comparator.comparing(Auctions::getPrice).reversed())
                 .limit(4)
                 .collect(Collectors.toList());
     }
 
-    public List<Auction> findAllForFilters(AuctionFilters auctionFilters) {
+    public List<Auctions> findAllForFilters(AuctionFilters auctionFilters) {
         return auctions.stream()
-                .filter(auction -> auctionFilters.getTitle() == null || auction.getTitle().toUpperCase().contains(auctionFilters.getTitle().toUpperCase()))
+                .filter(auctions -> auctionFilters.getTitle() == null || auctions.getTitle().toUpperCase().contains(auctionFilters.getTitle().toUpperCase()))
                 .collect(Collectors.toList());
     }
 
-    public List<Auction> findAllSorted(String sort) {
-        Comparator<Auction> comparator = Comparator.comparing(Auction::getTitle);
+    public List<Auctions> findAllSorted(String sort) {
+        Comparator<Auctions> comparator = Comparator.comparing(Auctions::getTitle);
         if(sort.equals("title")) {
-            comparator = Comparator.comparing(Auction::getTitle);
+            comparator = Comparator.comparing(Auctions::getTitle);
         } else if(sort.equals("price")) {
-            comparator = Comparator.comparing(Auction::getPrice);
+            comparator = Comparator.comparing(Auctions::getPrice);
         }
 
         return auctions.stream()

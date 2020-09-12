@@ -20,7 +20,7 @@ public class AuctionController {
     public String auctions(Model model,
                            @RequestParam(required = false) String sort,
                            AuctionFilters auctionFilters) {
-        List<Auction> auctions;
+        List<Auctions> auctions;
         if(sort != null) {
             auctions = auctionService.findAllSorted(sort);
         } else {

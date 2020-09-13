@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments :: head">
+    <meta charset="UTF-8">
+    <title>Filters</title>
+</head>
+<body>
+<div th:replace="fragments :: header"></div>
+<div class="content">
+    <h1 style="text-align: center" class="mt-4">WSZYSTKIE AUKCJE</h1>
+
+    <form method="post" th:action="@{/filters}" th:object="${filtered}">
+        Id: <label>
+        <input type="number" th:field="*{id}"></label>
+        Nazwa producenta samochodu: <label>
+        <input type="text" th:field="*{carMake}"></label>
+        Nazwa modelu samochodu: <label>
+        <input type="text" th:field="*{carModel}"></label>
+        Nazwa koloru samochodu: <label>
+        <input type="text" th:field="*{color}"></label>
+        Cena: <label>
+        <input type="text" th:field="*{price}"></label>
+        Data: <label>
+        <input type="text" th:field="*{endDate}"></label>
+    </form>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Nazwa producenta
+            </th>
+            <th>
+                Nazwa modelu
+            </th>
+            <th>
+                Nazwa koloru
+            </th>
+            <th>
+                Cena w PLN
+            </th>
+            <th>
+                Data
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="auction: ${auctions}">
+            <td th:text="|${auction.id}|"></td>
+            <td th:text="|${auction.carMake}|"></td>
+            <td th:text="|${auction.carModel}|"></td>
+            <td th:text="${auction.color}"></td>
+            <td th:text="|${auction.price} zł|"></td>
+            <td th:text="|${auction.endDate}|"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

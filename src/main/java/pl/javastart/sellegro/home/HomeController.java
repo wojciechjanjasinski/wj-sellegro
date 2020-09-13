@@ -16,7 +16,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("cars", auctionService.find4MostExpensive());
+     //   model.addAttribute("cars", auctionService.find4MostExpensive());
         return "home";
     }
 }

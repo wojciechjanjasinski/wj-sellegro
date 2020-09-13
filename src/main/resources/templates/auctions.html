@@ -6,50 +6,110 @@
 <div th:replace="fragments :: header"></div>
 <div class="content">
     <h1 style="text-align: center" class="mt-4">WSZYSTKIE AUKCJE</h1>
-
-    <form action="/auctions" method="get" th:object="${filters}">
-        <input type="text" placeholder="Tytuł aukcji" th:field="*{title}">
-        <input type="text" placeholder="Producent" th:field="*{carMaker}">
-        <input type="text" placeholder="Marka" th:field="*{carModel}">
-        <input type="text" placeholder="Kolor" th:field="*{color}">
-        <input type="submit" value="Filtruj" class="btn btn-primary"/>
-    </form>
-
+    
     <table class="table">
         <thead>
         <tr>
             <th>
-                <a href="/auctions?sort=title">
-                    Tytuł
+                <a href="/auctions_sorted?sort=ID_UP">
+                    Sortowanie rosnąco według ID
                 </a>
             </th>
             <th>
-                <a href="/auctions?sort=price">
-                    Cena
+                <a href="/auctions_sorted?sort=ID_DOWN">
+                    Sortowanie malejąco według ID
                 </a>
             </th>
             <th>
-                <a href="/auctions?sort=color">
-                    Kolor
+                <a href="/auctions_sorted?sort=CAR_MAKE_UP">
+                    Sortowanie po nazwach marek alfabetycznie
                 </a>
             </th>
             <th>
-                <a href="/auctions?sort=endDate">
-                    Do kiedy
+                <a href="/auctions_sorted?sort=CAR_MAKE_DOWN">
+                    Sortowanie po nazwach marek od Z do A
+                </a>
+            </th>
+            <th>
+                <a href="/auctions_sorted?sort=CAR_MODEL_UP">
+                    Sortowanie alfabetyczne po nazwach modeli.
+                </a>
+            </th>
+            <th>
+                <a href="/auctions_sorted?sort=CAR_MODEL_DOWN">
+                    Sortowanie od Z do A po nazwach modeli.
+                </a>
+            </th>
+            <th>
+                <a href="/auctions_sorted?sort=COLOR_UP">
+                    Sortowanie alfabetyczne po kolorze samochodu.
+                </a>
+            </th>
+            <th>
+                <a href="/auctions_sorted?sort=COLOR_DOWN">
+                    Sortowanie od Z DO A po nazwach koloru.
+                </a>
+            </th>
+            <th>
+                <a href="/auctions_sorted?sort=PRICE_UP">
+                    Cena rosnąco.
+                </a>
+            </th>
+            <th>
+                <a href="/auctions_sorted?sort=PRICE_DOWN">
+                    Cena malejąco.
+                </a>
+            </th>
+            <th>
+                <a href="/auctions_sorted?sort=END_DATE_UP">
+                    Data rosnąco.
+                </a>
+            </th>
+            <th>
+                <a href="/auctions_sorted?sort=END_DATE_DOWN">
+                    Data malejąco.
                 </a>
             </th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="car: ${cars}">
-            <td th:text="${car.title}"></td>
-            <td th:text="|${car.price} zł|"></td>
-            <td th:text="${car.color}"></td>
-            <td th:text="|${car.endDate}|"></td>
-        </tr>
         </tbody>
     </table>
 
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                    ID
+            </th>
+            <th>
+                    Nazwa producenta
+            </th>
+            <th>
+                    Nazwa modelu
+            </th>
+            <th>
+                Nazwa koloru
+            </th>
+            <th>
+                Cena w PLN
+            </th>
+            <th>
+                Data
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="auction: ${auctions}">
+            <td th:text="|${auction.id}|"></td>
+            <td th:text="|${auction.carMake}|"></td>
+            <td th:text="|${auction.carModel}|"></td>
+            <td th:text="${auction.color}"></td>
+            <td th:text="|${auction.price} zł|"></td>
+            <td th:text="|${auction.endDate}|"></td>
+        </tr>
+        </tbody>
+    </table>
 
 </div>
 </body>
